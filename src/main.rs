@@ -41,34 +41,23 @@ fn main() {
 
         let mut rng = rand::rng();
 
+        if high_num - low_num >= 100 {
+            println!("Good luck soldier.");
+        }
         if high_num - low_num >= 50 {
             println!("Well isn't that interesting...");
-        } else if high_num - low_num >= 100 {
-            println!("Good luck soldier.");
         } else {
             println!(
                 "Alright you've inputted your starting ({}) and ending ({}) numbers! Now guess!",
                 low_num, high_num
             );
         }
-        println!("---- Remember. You only have one shot at this. ----");
+        println!("\n---- Remember. You only have one shot at this. ----\n");
         let mut count: i32 = 0;
 
         loop {
             let n: i32 = rng.random_range(low_num..=high_num);
             let guess = get_input("Enter number >> ");
-
-            if count == 10 {
-                println!("=== You have guessed wrong 10 times. ===")
-            } else if count == 25 {
-                println!("=== 25 tries. Feeling like giving up yet? ===")
-            } else if count == 50 {
-                println!("=== That's the 50th. Persistent, aren't you? ===")
-            } else if count == 100 {
-                println!("=== It's your 100th attempt. Such determination... ===")
-            } else if count == 200 {
-                println!("=== Well, I'll be here until you leave or succeed. ===")
-            }
 
             if guess > high_num {
                 println!(
@@ -86,7 +75,22 @@ fn main() {
                 println!("Wrong. It was {}!", n);
                 count += 1;
             } else {
-                println!("Well hey, you did it! It's {}!", n);
+                println!(
+                    "Well hey, you did it! It's {}! It took you {} attempts!",
+                    n, count
+                );
+
+                if count == 10 {
+                    println!("=== You have guessed wrong 10 times. ===")
+                } else if count == 25 {
+                    println!("=== 25 tries. Feeling like giving up yet? ===")
+                } else if count == 50 {
+                    println!("=== That's the 50th. Persistent, aren't you? ===")
+                } else if count == 100 {
+                    println!("=== It's your 100th attempt. Such determination... ===")
+                } else if count == 200 {
+                    println!("=== Well, I'll be here until you leave or succeed. ===")
+                }
 
                 sleep(Duration::from_secs(2));
 
